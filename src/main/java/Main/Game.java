@@ -1,17 +1,45 @@
 package Main;
 
 
+import Entities.Sprite;
+
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+
 public class Game implements Runnable {
 
     Boolean isRunning = true;
     private Thread thread;
 
+    private Sprite sprite;
+    private Frame frame;
+    private BufferedImage image;
+
     public void tick(){}
 
-    public void render(){}
+    public void render(){
+        BufferStrategy bs = frame.getBufferStrategy();
+        if (bs == null) {
+            frame.createBufferStrategy(3);
+            return;
+        }
+        //set o layer do fundo;
+        Graphics g = image.getGraphics();
+        g.setColor(Color.BLUE);
+        g.fillRect(0, 0, Frame.winWidth, Frame.winHeight);
+        /**/
+        g.dispose();
+        g = bs.getDrawGraphics();
+        g.drawImage(image, 0, 0, Frame.winWidth * Frame.winScale, Frame.winHeight * Frame.winScale, null);
+        bs.show();
+    }
 
     public Game(){
-        Frame frame = new Frame();
+       // sprite = new Sprite(System.getProperty("user.dir") + "/src/main/image.png");
+        image = new BufferedImage(Frame.winWidth, Frame.winHeight, BufferedImage.TYPE_INT_RGB);
+
+        frame = new Frame();
         frame.newFrame();
     }
 
