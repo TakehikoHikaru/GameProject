@@ -17,4 +17,8 @@ public class Sprite {
     public static BufferedImage getSprite(int spriteSize, int x, int y){
         return image.getSubimage(x, y, spriteSize, spriteSize);
     }
+
+    public static BufferedImage getSprite(int x, int y, int width, int height){
+        return image.getSubimage(x, y, width, height);
+    }
 }

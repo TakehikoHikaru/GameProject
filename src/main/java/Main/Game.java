@@ -2,17 +2,20 @@ package Main;
 
 
 import Entities.Sprite;
+import World.World;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Game implements Runnable {
 
     Boolean isRunning = true;
     private Thread thread;
+    private World world;
 
-    private Sprite sprite;
+    public static Sprite sprite;
     private Frame frame;
     private BufferedImage image;
 
@@ -29,16 +32,17 @@ public class Game implements Runnable {
         g.setColor(Color.BLUE);
         g.fillRect(0, 0, Frame.winWidth, Frame.winHeight);
         /**/
+        world.render(g);
         g.dispose();
         g = bs.getDrawGraphics();
         g.drawImage(image, 0, 0, Frame.winWidth * Frame.winScale, Frame.winHeight * Frame.winScale, null);
         bs.show();
     }
 
-    public Game(){
-       // sprite = new Sprite(System.getProperty("user.dir") + "/src/main/image.png");
+    public Game() throws IOException {
         image = new BufferedImage(Frame.winWidth, Frame.winHeight, BufferedImage.TYPE_INT_RGB);
-
+        sprite = new Sprite(System.getProperty("user.dir") + "/src/main/image.png");
+        world = new World(System.getProperty("user.dir") + "/src/main/map.png");
         frame = new Frame();
         frame.newFrame();
     }
