@@ -2,6 +2,7 @@ package Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 
 public class Frame extends Canvas {
 
@@ -10,7 +11,8 @@ public class Frame extends Canvas {
     public static int winHeight = 600;
     public static int winScale = 1;
 
-    public void newFrame(){
+    public void newFrame(KeyListener keyBoard){
+        addKeyListener(keyBoard);
         this.setPreferredSize(new Dimension(winWidth * winScale, winHeight * winScale));
         initFrame();
     }
